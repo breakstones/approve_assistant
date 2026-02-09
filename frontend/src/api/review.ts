@@ -4,6 +4,19 @@
  */
 import { apiClient } from './client'
 
+// 高亮区域类型（用于 PDF 预览）
+export interface HighlightArea {
+  page: number
+  bbox: {
+    x1: number
+    y1: number
+    x2: number
+    y2: number
+  }
+  color?: string
+  id?: string
+}
+
 // 审查类型定义
 export type ReviewStatus = 'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED'
 

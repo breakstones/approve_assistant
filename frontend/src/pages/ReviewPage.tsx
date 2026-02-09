@@ -2,9 +2,10 @@
  * Review Page
  * 审核结果页面 - 使用双屏布局
  */
+import { useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { ReviewLayoutContainer, RuleList } from '../components'
-import { type ReviewResult, type Rule } from '../api'
+import { ReviewLayoutContainer, RuleList, PDFViewer } from '../components'
+import { type ReviewResult, type Rule, type HighlightArea } from '../api'
 
 // Mock 数据 - 实际应从 API 获取
 const mockResults: ReviewResult[] = [
@@ -95,14 +96,37 @@ const mockRules: Rule[] = [
   },
 ]
 
+// 示例 PDF URL（实际应从文档服务获取）
+const SAMPLE_PDF_URL = 'https://mozilla.github.io/pdf.js/web/compressed.tracemonkeypldi.pdf'
+
 export default function ReviewPage() {
   const { reviewId } = useParams()
+  const [highlights, setHighlights] = useState<HighlightArea[]>([])
+  const [pdfUrl] = useState<string | Blob>(SAMPLE_PDF_URL)
 
-  // 证据点击处理（将在 TASK-506 中实现完整联动）
-  const handleEvidenceClick = (evidence: ReviewResult['evidence'][0]) => {
-    console.log('Evidence clicked:', evidence)
-    // TODO: 跳转到 PDF 对应页码并高亮
-  }
+  // 证据点击处理（跳转到对应页并高亮）
+  const handleEvidenceClick = useCallback((evidence: ReviewResult['evidence'][0]) => {
+    if (!evidence.bbox) {
+      console.warn('Evidence has no bbox:', evidence)
+      return
+    }
+
+    const highlight: HighlightArea = {
+      page: evidence.page,
+      bbox: evidence.bbox,
+      id: evidence.chunk_id,
+    }
+
+    setHighlights([highlight])
+
+    // 平滑滚动到 PDF viewer
+    // PDFViewer 会自动跳转到对应页
+  }, [])
+
+  // 高亮区域点击处理
+  const handleHighlightClick = useCallback((highlight: HighlightArea) => {
+    console.log('Highlight clicked:', highlight)
+  }, [])
 
   return (
     <ReviewLayoutContainer
@@ -128,20 +152,21 @@ export default function ReviewPage() {
         />
       }
       rightPanel={
-        <div className="p-4">
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">
-            文档预览
-          </h2>
-          <div className="text-sm text-gray-500">
-            <p>PDF 预览组件正在开发中... (TASK-505)</p>
-            <ul className="mt-2 space-y-1 text-xs">
-              <li>• PDF.js 集成</li>
-              <li>• 渲染文档内容</li>
-              <li>• 基于 bbox 的高亮显示</li>
-              <li>• 页码导航</li>
-              <li>• 缩放控制</li>
-            </ul>
+        <div className="h-full">
+          <div className="mb-2 px-4 py-2 bg-white border-b border-gray-200">
+            <p className="text-xs text-gray-500">
+              示例 PDF（实际应从后端获取文档）
+            </p>
           </div>
+          <PDFViewer
+            fileUrl={pdfUrl}
+            highlights={highlights}
+            initialPage={highlights[0]?.page || 1}
+            onHighlightClick={handleHighlightClick}
+            onPageChange={(page) => {
+              console.log('Page changed:', page)
+            }}
+          />
         </div>
       }
     />
