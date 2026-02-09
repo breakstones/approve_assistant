@@ -236,8 +236,8 @@ class RuleService:
         created_rules = []
         for rule_data in rules_data:
             try:
-                rule = self.create(rule_data)
-                created_rules.append(rule.to_dict())
+                rule_dict = self.create(rule_data)
+                created_rules.append(rule_dict)
             except ValueError:
                 # 跳过已存在的规则
                 pass

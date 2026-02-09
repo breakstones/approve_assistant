@@ -5,6 +5,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic_settings import BaseSettings
 
+# Import routers
+from api import rule_routes
+
 
 class Settings(BaseSettings):
     """Application settings"""
@@ -39,6 +42,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include routers
+app.include_router(rule_routes.router, prefix="/api")
+
 
 @app.get("/")
 async def root():
@@ -47,6 +53,10 @@ async def root():
         "message": "TrustLens AI - Contract Review Assistant",
         "version": "0.1.0",
         "status": "running",
+        "endpoints": {
+            "rules": "/api/rules",
+            "health": "/health",
+        },
     }
 
 
