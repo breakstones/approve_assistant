@@ -1,17 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import UploadPage from './pages/UploadPage'
+import ReviewPage from './pages/ReviewPage'
 
 // Placeholder pages - to be implemented in subsequent tasks
-
-function ReviewPage() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">审核结果</h1>
-      <p className="text-gray-600">审核页面正在开发中... (TASK-503 ~ TASK-506)</p>
-    </div>
-  )
-}
 
 function RulesPage() {
   return (
