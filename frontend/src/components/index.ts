@@ -5,3 +5,4 @@
 export { default as ReviewLayout, ReviewLayoutContainer } from './ReviewLayout'
 export { default as RuleList } from './RuleList'
 export { default as PDFViewer } from './PDFViewer'
+export { default as EvidenceLink, useEvidenceLink, EvidenceList } from './EvidenceLink'
