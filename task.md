@@ -395,21 +395,25 @@
   - [x] 包含完整示例和限制处理
 - **输出文件**：`prompts/explain.txt`, `tests/test_explain_prompt.py`
 
-### TASK-402: 追问 API 实现
+### TASK-402: 追问 API 实现 ✅
 - **描述**：实现多轮追问的 HTTP API
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P1
 - **预计工时**：2h
+- **实际工时**：2h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-401
 - **验收标准**：
-  - [ ] POST /api/explain - 发起追问
-  - [ ] GET /api/explain/{session_id}/history - 对话历史
-  - [ ] 会话上下文管理
+  - [x] POST /api/explain - 发起追问
+  - [x] GET /api/explain/{session_id}/history - 对话历史
+  - [x] 会话上下文管理（内存会话存储）
+  - [x] GET /api/explain/sessions - 列会话
+  - [x] DELETE /api/explain/{session_id} - 删除会话
 - **自测要求**：
-  - [ ] 多轮对话测试
-  - [ ] 上下文准确性验证
-- **输出文件**：`backend/api/explain_routes.py`
+  - [x] 多轮对话测试（2轮问答）
+  - [x] 上下文准确性验证（会话ID保持一致）
+- **输出文件**：`backend/api/explain_routes.py`, `tests/test_explain_api.py`
 
 ---
 
