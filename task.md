@@ -419,22 +419,33 @@
 
 ## Phase 5: Web UI（前端）
 
-### TASK-501: 前端项目初始化
+### TASK-501: 前端项目初始化 ✅
 - **描述**：初始化 React + Vite 项目，配置基础架构
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：1.5h
+- **实际工时**：1.5h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-001
 - **验收标准**：
-  - [ ] Vite + React + TypeScript 项目
-  - [ ] 配置 TailwindCSS 或样式方案
-  - [ ] 配置 Axios/API 客户端
-  - [ ] 配置路由（React Router）
+  - [x] Vite + React + TypeScript 项目
+  - [x] 配置 TailwindCSS 或样式方案
+  - [x] 配置 Axios/API 客户端
+  - [x] 配置路由（React Router）
+  - [x] 创建 API 模块（rules, documents, review, explain）
+  - [x] 环境配置文件
 - **自测要求**：
-  - [ ] 项目可正常启动
-  - [ ] 热更新正常工作
+  - [x] 项目可正常启动（npm run dev）
+  - [x] 构建成功（npm run build）
 - **输出目录**：`frontend/`
+- **输出文件**：
+  - `frontend/src/api/client.ts` - API 客户端配置
+  - `frontend/src/api/rules.ts` - 规则 API
+  - `frontend/src/api/documents.ts` - 文档 API
+  - `frontend/src/api/review.ts` - 审查 API
+  - `frontend/src/api/explain.ts` - 解释 API
+  - `frontend/.env.example` - 环境配置示例
 
 ### TASK-502: 文档上传页面
 - **描述**：实现文档上传与进度展示
