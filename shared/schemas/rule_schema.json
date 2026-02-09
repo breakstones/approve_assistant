@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://trustlens.ai/schemas/rule",
+  "title": "Rule",
+  "description": "审核规则定义，用于合同审查的规则配置",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "name",
+    "category",
+    "intent",
+    "type",
+    "params",
+    "risk_level",
+    "retrieval_tags",
+    "prompt_template_id"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "规则唯一标识符",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "examples": ["payment_cycle_max_30", "confidentiality_clause_required"]
+    },
+    "name": {
+      "type": "string",
+      "description": "规则名称",
+      "examples": ["付款周期限制", "保密条款要求"]
+    },
+    "category": {
+      "type": "string",
+      "description": "规则分类",
+      "enum": [
+        "Payment",
+        "Liability",
+        "Confidentiality",
+        "Termination",
+        "Intellectual_Property",
+        "Dispute_Resolution",
+        "Force_Majeure",
+        "Governing_Law",
+        "Delivery",
+        "Quality",
+        "Other"
+      ]
+    },
+    "intent": {
+      "type": "string",
+      "description": "规则意图描述，用于生成检索查询",
+      "examples": ["限制付款周期不超过 30 天", "合同必须包含保密条款"]
+    },
+    "type": {
+      "type": "string",
+      "description": "规则类型",
+      "enum": ["numeric_constraint", "text_contains", "prohibition", "requirement"]
+    },
+    "params": {
+      "type": "object",
+      "description": "规则参数，根据 type 不同而不同",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/numeric_constraint_params"
+        },
+        {
+          "$ref": "#/definitions/text_contains_params"
+        },
+        {
+          "$ref": "#/definitions/prohibition_params"
+        },
+        {
+          "$ref": "#/definitions/requirement_params"
+        }
+      ]
+    },
+    "risk_level": {
+      "type": "string",
+      "description": "风险等级",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+    },
+    "retrieval_tags": {
+      "type": "array",
+      "description": "用于向量检索的标签",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "examples": [["payment", "cycle"], ["confidentiality"]]
+    },
+    "prompt_template_id": {
+      "type": "string",
+      "description": "关联的 Prompt 模板 ID",
+      "examples": ["numeric_constraint_v1", "text_contains_v1"]
+    },
+    "version": {
+      "type": "integer",
+      "description": "规则版本号",
+      "default": 1,
+      "minimum": 1
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "规则是否启用",
+      "default": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "创建时间"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "更新时间"
+    }
+  },
+  "definitions": {
+    "numeric_constraint_params": {
+      "type": "object",
+      "description": "数值约束参数",
+      "required": ["field", "operator", "value"],
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "约束字段",
+          "examples": ["payment_cycle", "penalty_rate", "delivery_days"]
+        },
+        "operator": {
+          "type": "string",
+          "description": "比较操作符",
+          "enum": ["<", "<=", "=", ">=", ">", "between"]
+        },
+        "value": {
+          "oneOf": [
+            {"type": "number"},
+            {
+              "type": "array",
+              "items": {"type": "number"},
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ],
+          "description": "约束值，单个数值或范围[min, max]"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位",
+          "examples": ["days", "percent", "times", "currency"]
+        }
+      }
+    },
+    "text_contains_params": {
+      "type": "object",
+      "description": "文本包含参数",
+      "required": ["keywords", "match_mode"],
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1,
+          "description": "必须包含的关键词"
+        },
+        "match_mode": {
+          "type": "string",
+          "enum": ["all", "any", "exact"],
+          "description": "匹配模式：all=全部关键词，any=任意关键词，exact=精确匹配"
+        },
+        "case_sensitive": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "prohibition_params": {
+      "type": "object",
+      "description": "禁止条款参数",
+      "required": ["prohibited_patterns"],
+      "properties": {
+        "prohibited_patterns": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1,
+          "description": "禁止的文本模式或关键词"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["entire", "specific_clause"],
+          "description": "禁止范围",
+          "default": "entire"
+        }
+      }
+    },
+    "requirement_params": {
+      "type": "object",
+      "description": "必须条款参数",
+      "required": ["required_clauses"],
+      "properties": {
+        "required_clauses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["clause_type"],
+            "properties": {
+              "clause_type": {
+                "type": "string",
+                "description": "条款类型",
+                "examples": ["termination", "confidentiality", "force_majeure"]
+              },
+              "min_content_length": {
+                "type": "integer",
+                "description": "最小内容长度"
+              }
+            }
+          },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

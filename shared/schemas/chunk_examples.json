@@ -1,0 +1,240 @@
+{
+  "examples": [
+    {
+      "chunk_id": "contract_001_p1_c0",
+      "doc_id": "contract_001",
+      "page": 1,
+      "clause_hint": "payment",
+      "text": "付款方式：甲方应在收到乙方开具的符合税务要求的增值税专用发票后 30 日内，通过银行转账方式向乙方支付合同款项。",
+      "bbox": [100.5, 200.0, 500.0, 250.5],
+      "char_start": 0,
+      "char_end": 65,
+      "token_count": 85,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "3.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p1_c1",
+      "doc_id": "contract_001",
+      "page": 1,
+      "clause_hint": "payment",
+      "text": "付款周期：乙方应在收到甲方确认的验收报告后 45 日内完成全部货物交付。",
+      "bbox": [100.5, 260.0, 500.0, 290.5],
+      "char_start": 66,
+      "char_end": 125,
+      "token_count": 70,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "3.2"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p2_c0",
+      "doc_id": "contract_001",
+      "page": 2,
+      "clause_hint": "confidentiality",
+      "text": "保密义务：双方应对在合作过程中知悉的对方商业秘密、技术信息等保密信息承担保密义务，未经对方书面同意不得向任何第三方披露。保密期限为合同终止后 3 年。",
+      "bbox": [80.0, 150.0, 530.0, 220.0],
+      "char_start": 500,
+      "char_end": 630,
+      "token_count": 120,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": true,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "5.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p2_c1",
+      "doc_id": "contract_001",
+      "page": 2,
+      "clause_hint": "liability",
+      "text": "违约责任：如乙方未按约定时间交付货物，每逾期一日，应向甲方支付合同总金额 0.5% 的违约金。逾期超过 15 日的，甲方有权解除合同。",
+      "bbox": [80.0, 230.0, 530.0, 290.0],
+      "char_start": 631,
+      "char_end": 750,
+      "token_count": 110,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "6.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p3_c0",
+      "doc_id": "contract_001",
+      "page": 3,
+      "clause_hint": "governing_law",
+      "text": "适用法律：本合同的订立、效力、解释、履行及争议解决均适用中华人民共和国法律。",
+      "bbox": [80.0, 400.0, 530.0, 440.0],
+      "char_start": 1000,
+      "char_end": 1080,
+      "token_count": 60,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "9.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p3_c1",
+      "doc_id": "contract_001",
+      "page": 3,
+      "clause_hint": "dispute_resolution",
+      "text": "争议解决：凡因本合同引起的或与本合同有关的任何争议，双方应友好协商解决；协商不成的，任何一方均有权将争议提交北京仲裁委员会，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。",
+      "bbox": [80.0, 450.0, 530.0, 530.0],
+      "char_start": 1081,
+      "char_end": 1280,
+      "token_count": 140,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "9.2"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p4_c0",
+      "doc_id": "contract_001",
+      "page": 4,
+      "clause_hint": "termination",
+      "text": "合同终止：经双方协商一致，可以解除本合同。一方严重违约导致合同目的无法实现的，守约方有权单方解除合同。",
+      "bbox": [80.0, 100.0, 530.0, 150.0],
+      "char_start": 1400,
+      "char_end": 1520,
+      "token_count": 85,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "7.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p5_c0",
+      "doc_id": "contract_001",
+      "page": 5,
+      "clause_hint": "delivery",
+      "text": "交付期限：乙方应在合同签订后 30 日内将全部货物交付至甲方指定地点。交付地点为北京市朝阳区XX路XX号甲方仓库。",
+      "bbox": [80.0, 200.0, 530.0, 260.0],
+      "char_start": 1800,
+      "char_end": 1920,
+      "token_count": 95,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "2.1"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p5_c1",
+      "doc_id": "contract_001",
+      "page": 5,
+      "clause_hint": "quality",
+      "text": "质量标准：货物应符合国家相关标准及行业规范，并提供质量合格证明。货物质保期为交付后 12 个月。",
+      "bbox": [80.0, 270.0, 530.0, 320.0],
+      "char_start": 1921,
+      "char_end": 2030,
+      "token_count": 80,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "2.2"
+      }
+    },
+    {
+      "chunk_id": "contract_001_p6_c0",
+      "doc_id": "contract_001",
+      "page": 6,
+      "clause_hint": "other",
+      "text": "其他：本合同一式两份，甲乙双方各执一份，具有同等法律效力。本合同自双方签字盖章之日起生效。",
+      "bbox": [80.0, 500.0, 530.0, 550.0],
+      "char_start": 2300,
+      "char_end": 2400,
+      "token_count": 65,
+      "metadata": {
+        "font_size": 12,
+        "font_name": "SimSun",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "zh",
+        "section_number": "10"
+      }
+    },
+    {
+      "chunk_id": "contract_002_p1_c0",
+      "doc_id": "contract_002",
+      "page": 1,
+      "clause_hint": "payment",
+      "text": "The Buyer shall pay the Seller 100% of the contract price within 60 days after receipt of the invoice and acceptance of the goods.",
+      "bbox": {
+        "x1": 50.0,
+        "y1": 150.0,
+        "x2": 550.0,
+        "y2": 200.0,
+        "page_width": 612,
+        "page_height": 792,
+        "normalized": false
+      },
+      "char_start": 0,
+      "char_end": 140,
+      "token_count": 45,
+      "metadata": {
+        "font_size": 11,
+        "font_name": "Times New Roman",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "en",
+        "section_number": "3.1"
+      }
+    },
+    {
+      "chunk_id": "contract_002_p2_c0",
+      "doc_id": "contract_002",
+      "page": 2,
+      "clause_hint": "force_majeure",
+      "text": "Force Majeure: Neither party shall be liable for failure to perform its obligations under this Contract if such failure is caused by events beyond the reasonable control of the party, including but not limited to acts of God, war, strikes, or government restrictions.",
+      "bbox": [50.0, 300.0, 550.0, 400.0],
+      "char_start": 500,
+      "char_end": 750,
+      "token_count": 95,
+      "metadata": {
+        "font_size": 11,
+        "font_name": "Times New Roman",
+        "is_bold": false,
+        "is_italic": false,
+        "language": "en",
+        "section_number": "7.1"
+      }
+    }
+  ]
+}

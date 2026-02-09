@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://trustlens.ai/schemas/chunk",
+  "title": "Chunk",
+  "description": "文档切分单元，一个 Chunk 代表一个最小可高亮证据单元",
+  "type": "object",
+  "required": [
+    "chunk_id",
+    "doc_id",
+    "page",
+    "text",
+    "bbox"
+  ],
+  "properties": {
+    "chunk_id": {
+      "type": "string",
+      "description": "Chunk 唯一标识符，格式：{doc_id}_p{page}_c{chunk_index}",
+      "pattern": "^[a-zA-Z0-9_]+_p\\d+_c\\d+$",
+      "examples": ["doc1_p3_c2", "contract_001_p1_c0", "agreement_v2_p5_c12"]
+    },
+    "doc_id": {
+      "type": "string",
+      "description": "所属文档 ID",
+      "examples": ["doc1", "contract_001", "agreement_v2"]
+    },
+    "page": {
+      "type": "integer",
+      "description": "页码（从 1 开始）",
+      "minimum": 1,
+      "examples": [1, 3, 10]
+    },
+    "clause_hint": {
+      "type": "string",
+      "description": "条款类型提示，用于语义增强",
+      "enum": [
+        "payment",
+        "liability",
+        "confidentiality",
+        "termination",
+        "intellectual_property",
+        "dispute_resolution",
+        "force_majeure",
+        "governing_law",
+        "delivery",
+        "quality",
+        "warranty",
+        "indemnification",
+        "limitation_of_liability",
+        "amendment",
+        "severability",
+        "entire_agreement",
+        "assignment",
+        "notices",
+        "other",
+        "unknown"
+      ],
+      "examples": ["payment", "confidentiality", "other"]
+    },
+    "text": {
+      "type": "string",
+      "description": "Chunk 文本内容，推荐 150-300 tokens",
+      "minLength": 10,
+      "examples": [
+        "付款周期为收到发票后 45 日内完成。",
+        "乙方应对其在履行本合同过程中知悉的甲方商业秘密承担保密义务。",
+        "本合同适用中华人民共和国法律。"
+      ]
+    },
+    "bbox": {
+      "description": "边界框坐标，格式：[x1, y1, x2, y2]，单位：点（points）或归一化坐标",
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "点坐标格式 [x1, y1, x2, y2]，通常用于 PDF",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4,
+          "examples": [[100.5, 200.0, 500.0, 250.5], [0, 0, 612, 792]]
+        },
+        {
+          "type": "object",
+          "description": "详细边界框信息",
+          "required": ["x1", "y1", "x2", "y2"],
+          "properties": {
+            "x1": {"type": "number", "description": "左上角 X 坐标"},
+            "y1": {"type": "number", "description": "左上角 Y 坐标"},
+            "x2": {"type": "number", "description": "右下角 X 坐标"},
+            "y2": {"type": "number", "description": "右下角 Y 坐标"},
+            "page_width": {"type": "number", "description": "页面宽度"},
+            "page_height": {"type": "number", "description": "页面高度"},
+            "normalized": {
+              "type": "boolean",
+              "description": "是否为归一化坐标（0-1）",
+              "default": false
+            }
+          },
+          "examples": [
+            {
+              "x1": 100.5,
+              "y1": 200.0,
+              "x2": 500.0,
+              "y2": 250.5,
+              "page_width": 612,
+              "page_height": 792,
+              "normalized": false
+            },
+            {
+              "x1": 0.1,
+              "y1": 0.2,
+              "x2": 0.9,
+              "y2": 0.3,
+              "normalized": true
+            }
+          ]
+        }
+      ]
+    },
+    "char_start": {
+      "type": "integer",
+      "description": "在文档全文中的起始字符位置",
+      "minimum": 0,
+      "examples": [0, 1500, 3000]
+    },
+    "char_end": {
+      "type": "integer",
+      "description": "在文档全文中的结束字符位置",
+      "minimum": 0,
+      "examples": [150, 1650, 3200]
+    },
+    "token_count": {
+      "type": "integer",
+      "description": "Token 数量估算",
+      "minimum": 0,
+      "examples": [50, 150, 300]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "附加元数据",
+      "properties": {
+        "font_size": {"type": "number", "description": "字体大小"},
+        "font_name": {"type": "string", "description": "字体名称"},
+        "is_bold": {"type": "boolean", "description": "是否加粗"},
+        "is_italic": {"type": "boolean", "description": "是否斜体"},
+        "language": {"type": "string", "description": "语言代码", "examples": ["zh", "en", "zh-en"]},
+        "section_number": {"type": "string", "description": "章节编号", "examples": ["1.1", "3.2", "Article 5"]}
+      }
+    },
+    "embedding": {
+      "type": "array",
+      "description": "文本向量嵌入（可选，存储时可能分离）",
+      "items": {"type": "number"}
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "创建时间"
+    }
+  },
+  "definitions": {
+    "bbox_array": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "bbox_object": {
+      "type": "object",
+      "required": ["x1", "y1", "x2", "y2"],
+      "properties": {
+        "x1": {"type": "number"},
+        "y1": {"type": "number"},
+        "x2": {"type": "number"},
+        "y2": {"type": "number"},
+        "page_width": {"type": "number"},
+        "page_height": {"type": "number"},
+        "normalized": {"type": "boolean"}
+      }
+    }
+  }
+}

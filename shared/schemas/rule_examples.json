@@ -1,0 +1,151 @@
+{
+  "examples": [
+    {
+      "rule_id": "payment_cycle_max_30",
+      "name": "付款周期限制",
+      "category": "Payment",
+      "intent": "限制付款周期不超过 30 天",
+      "type": "numeric_constraint",
+      "params": {
+        "field": "payment_cycle",
+        "operator": "<=",
+        "value": 30,
+        "unit": "days"
+      },
+      "risk_level": "HIGH",
+      "retrieval_tags": ["payment", "cycle", "settlement"],
+      "prompt_template_id": "numeric_constraint_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "penalty_rate_max_5_percent",
+      "name": "违约金上限限制",
+      "category": "Payment",
+      "intent": "违约金比例不得超过合同总金额的 5%",
+      "type": "numeric_constraint",
+      "params": {
+        "field": "penalty_rate",
+        "operator": "<=",
+        "value": 5,
+        "unit": "percent"
+      },
+      "risk_level": "HIGH",
+      "retrieval_tags": ["payment", "penalty", "breach"],
+      "prompt_template_id": "numeric_constraint_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "confidentiality_clause_required",
+      "name": "保密条款要求",
+      "category": "Confidentiality",
+      "intent": "合同必须包含保密条款",
+      "type": "requirement",
+      "params": {
+        "required_clauses": [
+          {
+            "clause_type": "confidentiality",
+            "min_content_length": 50
+          }
+        ]
+      },
+      "risk_level": "HIGH",
+      "retrieval_tags": ["confidentiality", "secret", "protection"],
+      "prompt_template_id": "requirement_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "force_majeure_clause_required",
+      "name": "不可抗力条款要求",
+      "category": "Force_Majeure",
+      "intent": "合同必须包含不可抗力条款",
+      "type": "requirement",
+      "params": {
+        "required_clauses": [
+          {
+            "clause_type": "force_majeure",
+            "min_content_length": 50
+          }
+        ]
+      },
+      "risk_level": "MEDIUM",
+      "retrieval_tags": ["force_majeure", "emergency", "exemption"],
+      "prompt_template_id": "requirement_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "no_auto_renewal",
+      "name": "禁止自动续约",
+      "category": "Termination",
+      "intent": "合同不得包含自动续约条款",
+      "type": "prohibition",
+      "params": {
+        "prohibited_patterns": ["自动续约", "自动延期", "auto-renew", "automatically renew"],
+        "scope": "entire"
+      },
+      "risk_level": "HIGH",
+      "retrieval_tags": ["termination", "renewal", "expiration"],
+      "prompt_template_id": "prohibition_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "delivery_days_between_7_and_30",
+      "name": "交付周期限制",
+      "category": "Delivery",
+      "intent": "交付周期应在 7-30 天之间",
+      "type": "numeric_constraint",
+      "params": {
+        "field": "delivery_days",
+        "operator": "between",
+        "value": [7, 30],
+        "unit": "days"
+      },
+      "risk_level": "MEDIUM",
+      "retrieval_tags": ["delivery", "shipping", "timeline"],
+      "prompt_template_id": "numeric_constraint_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "governing_law_china",
+      "name": "管辖法律要求",
+      "category": "Governing_Law",
+      "intent": "合同必须指定适用中华人民共和国法律",
+      "type": "text_contains",
+      "params": {
+        "keywords": ["中华人民共和国法律", "中国法律", "适用法律"],
+        "match_mode": "any",
+        "case_sensitive": false
+      },
+      "risk_level": "CRITICAL",
+      "retrieval_tags": ["governing_law", "jurisdiction", "legal"],
+      "prompt_template_id": "text_contains_v1",
+      "version": 1,
+      "enabled": true
+    },
+    {
+      "rule_id": "dispute_arbitration_required",
+      "name": "争议仲裁条款要求",
+      "category": "Dispute_Resolution",
+      "intent": "合同争议解决应包含仲裁条款",
+      "type": "requirement",
+      "params": {
+        "required_clauses": [
+          {
+            "clause_type": "arbitration",
+            "min_content_length": 30
+          }
+        ]
+      },
+      "risk_level": "MEDIUM",
+      "retrieval_tags": ["dispute", "arbitration", "resolution"],
+      "prompt_template_id": "requirement_v1",
+      "version": 1,
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://trustlens.ai/schemas/review_result",
+  "title": "ReviewResult",
+  "description": "审核结果，连接 Execution Agent 与 UI",
+  "type": "object",
+  "required": [
+    "rule_id",
+    "status",
+    "reason"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "description": "关联的规则 ID",
+      "examples": ["payment_cycle_max_30", "confidentiality_clause_required"]
+    },
+    "rule_name": {
+      "type": "string",
+      "description": "规则名称（冗余字段，便于展示）",
+      "examples": ["付款周期限制", "保密条款要求"]
+    },
+    "status": {
+      "type": "string",
+      "description": "审核状态",
+      "enum": ["PASS", "RISK", "MISSING"],
+      "examples": ["PASS", "RISK", "MISSING"]
+    },
+    "reason": {
+      "type": "string",
+      "description": "审核结论原因说明",
+      "examples": [
+        "合同约定付款周期为 45 天，超过 30 天限制",
+        "合同包含完整的保密条款",
+        "合同中未找到不可抗力相关条款"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "description": "原文证据列表，引用 Chunk 并包含定位信息",
+      "items": {
+        "type": "object",
+        "required": ["chunk_id", "page", "text"],
+        "properties": {
+          "chunk_id": {
+            "type": "string",
+            "description": "引用的 Chunk ID",
+            "examples": ["doc1_p3_c2", "contract_001_p2_c0"]
+          },
+          "page": {
+            "type": "integer",
+            "description": "页码",
+            "minimum": 1,
+            "examples": [1, 3, 5]
+          },
+          "text": {
+            "type": "string",
+            "description": "原文文本（逐字引用）",
+            "minLength": 1,
+            "examples": [
+              "付款周期为收到发票后 45 日内完成。",
+              "乙方应对其在履行本合同过程中知悉的甲方商业秘密承担保密义务。"
+            ]
+          },
+          "bbox": {
+            "description": "边界框坐标，用于 UI 高亮定位",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {"type": "number"},
+                "minItems": 4,
+                "maxItems": 4,
+                "examples": [[100.5, 200.0, 500.0, 250.5]]
+              },
+              {
+                "type": "object",
+                "required": ["x1", "y1", "x2", "y2"],
+                "properties": {
+                  "x1": {"type": "number"},
+                  "y1": {"type": "number"},
+                  "x2": {"type": "number"},
+                  "y2": {"type": "number"},
+                  "page_width": {"type": "number"},
+                  "page_height": {"type": "number"}
+                }
+              }
+            ]
+          },
+          "char_start": {
+            "type": "integer",
+            "description": "在 Chunk 中的起始字符位置",
+            "minimum": 0
+          },
+          "char_end": {
+            "type": "integer",
+            "description": "在 Chunk 中的结束字符位置",
+            "minimum": 0
+          },
+          "relevance_score": {
+            "type": "number",
+            "description": "相关性评分（0-1）",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "minItems": 0
+    },
+    "confidence": {
+      "type": "number",
+      "description": "审核结论置信度（0-1）",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.8
+    },
+    "suggestion": {
+      "type": "string",
+      "description": "修改建议（可选）",
+      "examples": [
+        "建议将付款周期修改为 30 天以内",
+        "建议补充完整的保密条款，包括保密范围、保密期限和违约责任"
+      ]
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "审核时间"
+    },
+    "reviewer": {
+      "type": "string",
+      "description": "审核器标识（模型或规则引擎）",
+      "examples": ["gpt-4", "rule_engine_v1"]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "附加元数据",
+      "properties": {
+        "retrieval_query": {"type": "string", "description": "检索查询"},
+        "retrieved_chunks": {"type": "integer", "description": "检索到的 Chunk 数量"},
+        "processing_time_ms": {"type": "number", "description": "处理耗时（毫秒）"},
+        "model_version": {"type": "string", "description": "模型版本"},
+        "prompt_version": {"type": "string", "description": "Prompt 版本"}
+      }
+    }
+  },
+  "definitions": {
+    "evidence_item": {
+      "type": "object",
+      "required": ["chunk_id", "page", "text"],
+      "properties": {
+        "chunk_id": {"type": "string"},
+        "page": {"type": "integer"},
+        "text": {"type": "string"},
+        "bbox": {
+          "oneOf": [
+            {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+            {
+              "type": "object",
+              "required": ["x1", "y1", "x2", "y2"],
+              "properties": {
+                "x1": {"type": "number"},
+                "y1": {"type": "number"},
+                "x2": {"type": "number"},
+                "y2": {"type": "number"}
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

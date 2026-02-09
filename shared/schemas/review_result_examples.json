@@ -1,0 +1,276 @@
+{
+  "examples": [
+    {
+      "rule_id": "payment_cycle_max_30",
+      "rule_name": "付款周期限制",
+      "status": "RISK",
+      "reason": "合同约定付款周期为 45 天，超过 30 天限制",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p1_c0",
+          "page": 1,
+          "text": "付款周期：乙方应在收到甲方确认的验收报告后 45 日内完成全部货物交付。",
+          "bbox": [100.5, 260.0, 500.0, 290.5],
+          "relevance_score": 0.95
+        }
+      ],
+      "confidence": 0.92,
+      "suggestion": "建议将付款周期修改为 30 日以内，以符合公司付款政策要求。",
+      "reviewed_at": "2026-02-09T12:00:00Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "付款周期 30 天限制 payment cycle",
+        "retrieved_chunks": 3,
+        "processing_time_ms": 1250,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "numeric_constraint_v1"
+      }
+    },
+    {
+      "rule_id": "penalty_rate_max_5_percent",
+      "rule_name": "违约金上限限制",
+      "status": "PASS",
+      "reason": "合同约定的违约金比例为 3%，未超过 5% 的上限要求",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p2_c1",
+          "page": 2,
+          "text": "违约责任：如乙方未按约定时间交付货物，每逾期一日，应向甲方支付合同总金额 0.5% 的违约金。",
+          "bbox": [80.0, 230.0, 530.0, 290.0],
+          "relevance_score": 0.98
+        }
+      ],
+      "confidence": 0.95,
+      "reviewed_at": "2026-02-09T12:00:05Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "违约金 比例 penalty rate percentage",
+        "retrieved_chunks": 2,
+        "processing_time_ms": 980,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "numeric_constraint_v1"
+      }
+    },
+    {
+      "rule_id": "confidentiality_clause_required",
+      "rule_name": "保密条款要求",
+      "status": "PASS",
+      "reason": "合同包含完整的保密条款，明确了保密范围、保密期限及违约责任",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p2_c0",
+          "page": 2,
+          "text": "保密义务：双方应对在合作过程中知悉的对方商业秘密、技术信息等保密信息承担保密义务，未经对方书面同意不得向任何第三方披露。保密期限为合同终止后 3 年。",
+          "bbox": [80.0, 150.0, 530.0, 220.0],
+          "relevance_score": 0.99
+        }
+      ],
+      "confidence": 0.97,
+      "reviewed_at": "2026-02-09T12:00:10Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "保密条款 confidentiality secret",
+        "retrieved_chunks": 2,
+        "processing_time_ms": 890,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "requirement_v1"
+      }
+    },
+    {
+      "rule_id": "force_majeure_clause_required",
+      "rule_name": "不可抗力条款要求",
+      "status": "MISSING",
+      "reason": "合同中未找到不可抗力相关条款，建议补充",
+      "evidence": [],
+      "confidence": 0.85,
+      "suggestion": "建议补充不可抗力条款，明确不可抗力事件的范围及双方的权利义务。",
+      "reviewed_at": "2026-02-09T12:00:15Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "不可抗力 force_majeure emergency",
+        "retrieved_chunks": 0,
+        "processing_time_ms": 750,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "requirement_v1"
+      }
+    },
+    {
+      "rule_id": "no_auto_renewal",
+      "rule_name": "禁止自动续约",
+      "status": "RISK",
+      "reason": "合同包含自动续约条款，违反禁止要求",
+      "evidence": [
+        {
+          "chunk_id": "contract_003_p4_c2",
+          "page": 4,
+          "text": "合同期限届满前 30 日，如任何一方未提出终止意向，本合同将自动延期一年。",
+          "bbox": [100.0, 400.0, 500.0, 450.0],
+          "relevance_score": 0.96
+        }
+      ],
+      "confidence": 0.93,
+      "suggestion": "建议删除自动续约条款，或修改为需要双方书面确认方可续约。",
+      "reviewed_at": "2026-02-09T12:00:20Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "自动续约 auto-renew 延期",
+        "retrieved_chunks": 1,
+        "processing_time_ms": 820,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "prohibition_v1"
+      }
+    },
+    {
+      "rule_id": "delivery_days_between_7_and_30",
+      "rule_name": "交付周期限制",
+      "status": "PASS",
+      "reason": "合同约定的交付周期为 30 日，符合 7-30 天的要求范围",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p5_c0",
+          "page": 5,
+          "text": "交付期限：乙方应在合同签订后 30 日内将全部货物交付至甲方指定地点。",
+          "bbox": [80.0, 200.0, 530.0, 260.0],
+          "relevance_score": 0.97
+        }
+      ],
+      "confidence": 0.94,
+      "reviewed_at": "2026-02-09T12:00:25Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "交付期限 delivery days 时间",
+        "retrieved_chunks": 2,
+        "processing_time_ms": 920,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "numeric_constraint_v1"
+      }
+    },
+    {
+      "rule_id": "governing_law_china",
+      "rule_name": "管辖法律要求",
+      "status": "PASS",
+      "reason": "合同明确指定适用中华人民共和国法律",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p3_c0",
+          "page": 3,
+          "text": "适用法律：本合同的订立、效力、解释、履行及争议解决均适用中华人民共和国法律。",
+          "bbox": [80.0, 400.0, 530.0, 440.0],
+          "relevance_score": 1.0
+        }
+      ],
+      "confidence": 0.98,
+      "reviewed_at": "2026-02-09T12:00:30Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "适用法律 管辖 法律 governing law",
+        "retrieved_chunks": 1,
+        "processing_time_ms": 780,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "text_contains_v1"
+      }
+    },
+    {
+      "rule_id": "dispute_arbitration_required",
+      "rule_name": "争议仲裁条款要求",
+      "status": "PASS",
+      "reason": "合同包含完整的仲裁条款，明确了仲裁机构",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p3_c1",
+          "page": 3,
+          "text": "争议解决：凡因本合同引起的或与本合同有关的任何争议，双方应友好协商解决；协商不成的，任何一方均有权将争议提交北京仲裁委员会，按照申请仲裁时该会现行有效的仲裁规则进行仲裁。",
+          "bbox": [80.0, 450.0, 530.0, 530.0],
+          "relevance_score": 0.98
+        }
+      ],
+      "confidence": 0.96,
+      "reviewed_at": "2026-02-09T12:00:35Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "争议解决 仲裁 arbitration dispute",
+        "retrieved_chunks": 1,
+        "processing_time_ms": 850,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "requirement_v1"
+      }
+    },
+    {
+      "rule_id": "quality_standard_required",
+      "rule_name": "质量标准要求",
+      "status": "RISK",
+      "reason": "合同中的质量标准描述不够具体，缺少具体的质量参数",
+      "evidence": [
+        {
+          "chunk_id": "contract_001_p5_c1",
+          "page": 5,
+          "text": "质量标准：货物应符合国家相关标准及行业规范，并提供质量合格证明。",
+          "bbox": [80.0, 270.0, 530.0, 320.0],
+          "relevance_score": 0.85
+        }
+      ],
+      "confidence": 0.78,
+      "suggestion": "建议明确具体的产品质量标准、技术参数及验收方法。",
+      "reviewed_at": "2026-02-09T12:00:40Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "质量标准 quality specification",
+        "retrieved_chunks": 1,
+        "processing_time_ms": 950,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "requirement_v1"
+      }
+    },
+    {
+      "rule_id": "limitation_of_liability",
+      "rule_name": "责任限制条款检查",
+      "status": "MISSING",
+      "reason": "合同中未找到责任限制条款",
+      "evidence": [],
+      "confidence": 0.82,
+      "suggestion": "建议补充责任限制条款，明确双方的责任上限。",
+      "reviewed_at": "2026-02-09T12:00:45Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "责任限制 limitation liability cap",
+        "retrieved_chunks": 0,
+        "processing_time_ms": 700,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "requirement_v1"
+      }
+    },
+    {
+      "rule_id": "multiple_payment_terms",
+      "rule_name": "多笔付款条款检查",
+      "status": "RISK",
+      "reason": "合同包含多笔付款安排，需核对付款节点与交付进度的匹配性",
+      "evidence": [
+        {
+          "chunk_id": "contract_002_p1_c0",
+          "page": 1,
+          "text": "首款支付：合同签订后 5 日内支付合同总金额的 30%。",
+          "bbox": [80.0, 180.0, 530.0, 220.0],
+          "relevance_score": 0.92
+        },
+        {
+          "chunk_id": "contract_002_p1_c1",
+          "page": 1,
+          "text": "尾款支付：货物验收合格后 15 日内支付剩余 70% 款项。",
+          "bbox": [80.0, 230.0, 530.0, 270.0],
+          "relevance_score": 0.90
+        }
+      ],
+      "confidence": 0.88,
+      "suggestion": "建议确认付款节点与交付里程碑的一致性，并明确验收标准。",
+      "reviewed_at": "2026-02-09T12:00:50Z",
+      "reviewer": "gpt-4",
+      "metadata": {
+        "retrieval_query": "付款 payment 节点 stage 比例 percentage",
+        "retrieved_chunks": 4,
+        "processing_time_ms": 1100,
+        "model_version": "gpt-4-0125-preview",
+        "prompt_version": "text_contains_v1"
+      }
+    }
+  ]
+}
