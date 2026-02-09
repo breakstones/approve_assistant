@@ -7,7 +7,8 @@ from sqlalchemy.orm import sessionmaker, Session
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Generator
-from .models import Base
+from .models import Base as RuleBase
+from .document_models import Base as DocumentBase
 
 
 class Database:
@@ -46,8 +47,9 @@ class Database:
             bind=self.engine
         )
 
-        # 创建所有表
-        Base.metadata.create_all(bind=self.engine)
+        # 创建所有表（两个 Base）
+        RuleBase.metadata.create_all(bind=self.engine)
+        DocumentBase.metadata.create_all(bind=self.engine)
 
     @contextmanager
     def get_session(self) -> Generator[Session, None, None]:

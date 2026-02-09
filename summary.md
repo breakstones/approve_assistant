@@ -60,14 +60,15 @@
 - [x] 规则配置 API（8个端点）
 
 ### Milestone 3: Document Intelligence
-**状态**：🚧 进行中
-**开始时间**：2026-02-09
+**状态**：✅ 完成
+**完成时间**：2026-02-09
 **负责人**：Claude
 **交付物**：
 - [x] PDF/DOCX 解析（PDF: pdfplumber + PyMuPDF，DOCX: python-docx）
-- [ ] 智能切分（Chunking）
-- [ ] Embedding Pipeline
-- [ ] 向量存储
+- [x] 智能切分（Chunking）
+- [x] Embedding Pipeline
+- [x] 向量存储（内存 + FAISS）
+- [x] 文档上传与状态管理 API
 
 ### Milestone 4: Execution Agent
 **状态**：📋 未开始
@@ -122,6 +123,7 @@
 | 2026-02-09 | TASK-202: DOCX 文档解析实现 | Claude | python-docx，支持段落提取与元数据 |
 | 2026-02-09 | TASK-203: 智能文档切分（Chunking） | Claude | 按段落智能切分，19种条款类型识别 |
 | 2026-02-09 | TASK-204: Embedding Pipeline 实现 | Claude | OpenAI/本地模型支持，FAISS/内存存储 |
+| 2026-02-09 | TASK-205: 文档上传与状态管理 API | Claude | 完整文档上传/状态管理API，异步处理 |
 
 #### 进行中
 | 任务 | 负责人 | 预计完成 |
@@ -175,15 +177,15 @@
 
 ### 总体统计
 - 总任务数：46
-- 已完成：12
+- 已完成：13
 - 进行中：0
-- 待开始：34
-- **完成率：26.1%**
+- 待开始：33
+- **完成率：28.3%**
 
 ### 按优先级
 | 优先级 | 总数 | 已完成 | 完成率 |
 |--------|------|--------|--------|
-| P0 | 32 | 11 | 34.4% |
+| P0 | 32 | 12 | 37.5% |
 | P1 | 14 | 1 | 7.1% |
 
 ### 按模块
@@ -191,7 +193,7 @@
 |------|------|--------|--------|
 | 基础设施与契约 | 5 | 5 | 100% ✅ |
 | Configuration Agent | 3 | 3 | 100% ✅ |
-| Document Intelligence | 5 | 4 | 80% |
+| Document Intelligence | 5 | 5 | 100% ✅ |
 | Execution Agent | 4 | 0 | 0% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |
