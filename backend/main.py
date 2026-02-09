@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic_settings import BaseSettings
 
 # Import routers
-from api import rule_routes, document_routes
+from api import rule_routes, document_routes, review_routes
 
 
 class Settings(BaseSettings):
@@ -45,6 +45,7 @@ app.add_middleware(
 # Include routers
 app.include_router(rule_routes.router, prefix="/api")
 app.include_router(document_routes.router, prefix="/api")
+app.include_router(review_routes.router, prefix="/api")
 
 
 @app.get("/")
@@ -57,6 +58,7 @@ async def root():
         "endpoints": {
             "rules": "/api/rules",
             "documents": "/api/documents",
+            "review": "/api/review",
             "health": "/health",
         },
     }

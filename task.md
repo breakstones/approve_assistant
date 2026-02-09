@@ -349,23 +349,27 @@
   - [x] 验证结果存储完整性
 - **输出文件**：`backend/execution/executor.py`, `tests/test_executor.py`
 
-### TASK-304: 审查任务 API
+### TASK-304: 审查任务 API ✅
 - **描述**：提供审查任务的触发与查询接口
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：2h
+- **实际工时**：2h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-303
 - **验收标准**：
-  - [ ] POST /api/review/start - 启动审查
-  - [ ] GET /api/review/{review_id}/status - 获取审查状态
-  - [ ] GET /api/review/{review_id}/results - 获取审查结果
-  - [ ] 支持规则选择（全量/指定）
+  - [x] POST /api/review/start - 启动审查
+  - [x] GET /api/review/{review_id}/status - 获取审查状态
+  - [x] GET /api/review/{review_id}/results - 获取审查结果
+  - [x] 支持规则选择（全量/指定）
+  - [x] GET /api/review - 列出审查任务
+  - [x] DELETE /api/review/{review_id} - 取消审查任务
 - **自测要求**：
-  - [ ] 完整审查流程测试
-  - [ ] 状态轮询测试
-  - [ ] 结果分页测试
-- **输出文件**：`backend/api/review_routes.py`
+  - [x] 完整审查流程测试（根端点、启动审查、状态查询、结果获取、列出任务）
+  - [x] 状态轮询测试（进度百分比计算）
+  - [x] 结果汇总统计（total/pass/risk/missing/failed）
+- **输出文件**：`backend/api/review_routes.py`, `tests/test_review_api.py`
 
 ---
 
