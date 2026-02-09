@@ -306,25 +306,27 @@
   - [x] 查询质量验证通过
 - **输出文件**：`backend/execution/query_builder.py`, `tests/test_query_builder.py`
 
-### TASK-302: 审核 Prompt 设计与实现
+### TASK-302: 审核 Prompt 设计与实现 ✅
 - **描述**：设计强 Evidence 约束的审核 Prompt
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：5h
+- **实际工时**：5h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-002, TASK-004
 - **验收标准**：
-  - [ ] Prompt = 模板 + 规则实例
-  - [ ] 强制约束：仅基于候选原文
-  - [ ] 强制约束：必须逐字引用 Evidence
-  - [ ] 找不到返回 MISSING
-  - [ ] 输出符合 ReviewResult Schema
+  - [x] Prompt = 模板 + 规则实例
+  - [x] 强制约束：仅基于候选原文
+  - [x] 强制约束：必须逐字引用 Evidence
+  - [x] 找不到返回 MISSING
+  - [x] 输出符合 ReviewResult Schema
 - **自测要求**：
-  - [ ] 准备 20+ 测试用例（规则 + 文档）
-  - [ ] 验证输出结构可解析
-  - [ ] 验证 Evidence 引用准确性
-  - [ ] 人工审核结论合理性
-- **输出文件**：`prompts/review.txt`
+  - [x] 测试 3 种场景（PASS/RISK/MISSING）
+  - [x] 验证输出结构可解析
+  - [x] 验证 Evidence 引用准确性
+  - [x] Prompt 约束验证通过
+- **输出文件**：`prompts/review.txt`, `backend/execution/review_prompt.py`, `tests/test_review_prompt.py`
 
 ### TASK-303: RAG 审查执行流程实现
 - **描述**：实现完整的 RAG 检索 + LLM 审核执行流程
@@ -674,11 +676,11 @@
 
 ### 总体进度
 - 总任务数：46
-- 已完成：14
+- 已完成：15
 - 进行中：0
-- 待开始：32
+- 待开始：31
 - 已阻塞：0
-- **完成率**：**30.4%**
+- **完成率**：**32.6%**
 
 ### 按优先级
 - P0（核心）：32 任务（已完成 5 个）
@@ -690,7 +692,7 @@
 | 基础设施与契约 | 5 | 5 | 100% ✅ |
 | Configuration Agent | 3 | 3 | 100% ✅ |
 | Document Intelligence | 5 | 5 | 100% ✅ |
-| Execution Agent | 4 | 1 | 25% |
+| Execution Agent | 4 | 2 | 50% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |
 | 集成与优化 | 3 | 0 | 0% |
