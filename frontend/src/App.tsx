@@ -1,15 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import HomePage from './pages/HomePage'
+import UploadPage from './pages/UploadPage'
 
 // Placeholder pages - to be implemented in subsequent tasks
-function UploadPage() {
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">文档上传</h1>
-      <p className="text-gray-600">上传页面正在开发中... (TASK-502)</p>
-    </div>
-  )
-}
 
 function ReviewPage() {
   return (
