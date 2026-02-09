@@ -12,7 +12,7 @@
 | 项目信息 | 值 |
 |----------|-----|
 | 项目名称 | TrustLens AI 合同审核助手 |
-| 当前阶段 | Phase 1: Configuration Agent |
+| 当前阶段 | Phase 2: Document Intelligence |
 | 开始日期 | 2026-02-09 |
 | 目标完成 | TBD |
 | 团队规模 | TBD |
@@ -51,20 +51,20 @@
 - [x] Evidence Schema (已包含在各 Schema 中)
 
 ### Milestone 2: Configuration Agent
-**状态**：📋 未开始
-**计划**：Day 1
-**负责人**：TBD
+**状态**：✅ 完成
+**完成时间**：2026-02-09
+**负责人**：Claude
 **交付物**：
-- [ ] 规则存储模型
-- [ ] 规则解析 Prompt
-- [ ] 规则配置 API
+- [x] 规则存储模型（SQLite + SQLAlchemy）
+- [x] 规则解析 Prompt（mock实现，20条测试用例100%通过）
+- [x] 规则配置 API（8个端点）
 
 ### Milestone 3: Document Intelligence
-**状态**：📋 未开始
-**计划**：Day 1
-**负责人**：TBD
+**状态**：🚧 进行中
+**开始时间**：2026-02-09
+**负责人**：Claude
 **交付物**：
-- [ ] PDF/DOCX 解析
+- [x] PDF/DOCX 解析（PDF: pdfplumber + PyMuPDF，DOCX: python-docx）
 - [ ] 智能切分（Chunking）
 - [ ] Embedding Pipeline
 - [ ] 向量存储
@@ -114,6 +114,12 @@
 | 2026-02-09 | Chunk Schema 设计与冻结 | Claude | 12个chunks、6页文档 |
 | 2026-02-09 | Review Result Schema 设计与冻结 | Claude | 11个审核结果、覆盖所有状态 |
 | 2026-02-09 | Document State Schema 设计 | Claude | 6种状态、9条转换规则 |
+| 2026-02-09 | Phase 1: Configuration Agent 完成 | Claude | 规则存储、解析、API 全部实现 |
+| 2026-02-09 | TASK-101: 规则存储模型实现 | Claude | SQLite + SQLAlchemy，返回dict避免session问题 |
+| 2026-02-09 | TASK-102: 自然语言规则解析 | Claude | Mock实现，20条测试用例100%通过 |
+| 2026-02-09 | TASK-103: 规则配置管理 API | Claude | 8个端点，路由顺序修复 |
+| 2026-02-09 | TASK-201: PDF 文档解析实现 | Claude | pdfplumber + PyMuPDF双引擎支持 |
+| 2026-02-09 | TASK-202: DOCX 文档解析实现 | Claude | python-docx，支持段落提取与元数据 |
 
 #### 进行中
 | 任务 | 负责人 | 预计完成 |
@@ -167,23 +173,23 @@
 
 ### 总体统计
 - 总任务数：46
-- 已完成：5
+- 已完成：10
 - 进行中：0
-- 待开始：41
-- **完成率：10.9%**
+- 待开始：36
+- **完成率：21.7%**
 
 ### 按优先级
 | 优先级 | 总数 | 已完成 | 完成率 |
 |--------|------|--------|--------|
-| P0 | 32 | 5 | 15.6% |
-| P1 | 14 | 0 | 0% |
+| P0 | 32 | 9 | 28.1% |
+| P1 | 14 | 1 | 7.1% |
 
 ### 按模块
 | 模块 | 总数 | 已完成 | 完成率 |
 |------|------|--------|--------|
 | 基础设施与契约 | 5 | 5 | 100% ✅ |
-| Configuration Agent | 3 | 0 | 0% |
-| Document Intelligence | 5 | 0 | 0% |
+| Configuration Agent | 3 | 3 | 100% ✅ |
+| Document Intelligence | 5 | 2 | 40% |
 | Execution Agent | 4 | 0 | 0% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |
@@ -215,9 +221,11 @@
 - 创建 summary.md（进展同步文档）
 - 确认 GitHub 仓库：https://github.com/breakstones/approve_assistant
 - **完成 Phase 0 所有 5 个任务**：项目初始化、Rule Schema、Chunk Schema、Review Result Schema、Document State Schema
+- **完成 Phase 1 所有 3 个任务**：规则存储模型、自然语言规则解析、规则配置管理 API
+- **完成 Phase 2 前 2 个任务**：PDF 文档解析、DOCX 文档解析
 - 创建 5 个核心 Schema 及示例数据
-- 创建 4 个验证测试脚本
-- 提交代码到 GitHub（commit d9f6928, 2203991）
+- 创建 7 个验证测试脚本
+- 提交代码到 GitHub（commit d9f6928, 2203991, ...）
 
 ---
 
