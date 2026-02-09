@@ -23,6 +23,15 @@ from .chunker import (
     chunk_document,
 )
 
+from .embedding import (
+    EmbeddingProvider,
+    OpenAIEmbeddingProvider,
+    LocalEmbeddingProvider,
+    EmbeddingPipeline,
+    EmbeddingResult,
+    create_embedding_pipeline,
+)
+
 __all__ = [
     # PDF Parser
     "PDFParser",
@@ -41,4 +50,11 @@ __all__ = [
     "Chunk",
     "DocumentChunker",
     "chunk_document",
+    # Embedding
+    "EmbeddingProvider",
+    "OpenAIEmbeddingProvider",
+    "LocalEmbeddingProvider",
+    "EmbeddingPipeline",
+    "EmbeddingResult",
+    "create_embedding_pipeline",
 ]

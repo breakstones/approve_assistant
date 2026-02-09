@@ -121,6 +121,7 @@
 | 2026-02-09 | TASK-201: PDF 文档解析实现 | Claude | pdfplumber + PyMuPDF双引擎支持 |
 | 2026-02-09 | TASK-202: DOCX 文档解析实现 | Claude | python-docx，支持段落提取与元数据 |
 | 2026-02-09 | TASK-203: 智能文档切分（Chunking） | Claude | 按段落智能切分，19种条款类型识别 |
+| 2026-02-09 | TASK-204: Embedding Pipeline 实现 | Claude | OpenAI/本地模型支持，FAISS/内存存储 |
 
 #### 进行中
 | 任务 | 负责人 | 预计完成 |
@@ -174,15 +175,15 @@
 
 ### 总体统计
 - 总任务数：46
-- 已完成：11
+- 已完成：12
 - 进行中：0
-- 待开始：35
-- **完成率：23.9%**
+- 待开始：34
+- **完成率：26.1%**
 
 ### 按优先级
 | 优先级 | 总数 | 已完成 | 完成率 |
 |--------|------|--------|--------|
-| P0 | 32 | 10 | 31.3% |
+| P0 | 32 | 11 | 34.4% |
 | P1 | 14 | 1 | 7.1% |
 
 ### 按模块
@@ -190,7 +191,7 @@
 |------|------|--------|--------|
 | 基础设施与契约 | 5 | 5 | 100% ✅ |
 | Configuration Agent | 3 | 3 | 100% ✅ |
-| Document Intelligence | 5 | 3 | 60% |
+| Document Intelligence | 5 | 4 | 80% |
 | Execution Agent | 4 | 0 | 0% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |
@@ -223,7 +224,7 @@
 - 确认 GitHub 仓库：https://github.com/breakstones/approve_assistant
 - **完成 Phase 0 所有 5 个任务**：项目初始化、Rule Schema、Chunk Schema、Review Result Schema、Document State Schema
 - **完成 Phase 1 所有 3 个任务**：规则存储模型、自然语言规则解析、规则配置管理 API
-- **完成 Phase 2 前 3 个任务**：PDF 文档解析、DOCX 文档解析、智能文档切分
+- **完成 Phase 2 前 4 个任务**：PDF 文档解析、DOCX 文档解析、智能文档切分、Embedding Pipeline
 - 创建 5 个核心 Schema 及示例数据
 - 创建 7 个验证测试脚本
 - 提交代码到 GitHub（commit d9f6928, 2203991, ...）
