@@ -219,24 +219,26 @@
   - [x] 验证文本提取完整性
 - **输出文件**：`backend/document/docx_parser.py`, `tests/test_docx_parser.py`
 
-### TASK-203: 智能文档切分（Chunking）
+### TASK-203: 智能文档切分（Chunking） ✅
 - **描述**：实现语义感知的文档切分，生成符合 Chunk Schema 的切分单元
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：4h
+- **实际工时**：4h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-201, TASK-202, TASK-003
 - **验收标准**：
-  - [ ] 按条款/段落智能切分
-  - [ ] Chunk 大小控制在 150-300 tokens
-  - [ ] 保留原文位置信息
-  - [ ] 支持 clause_hint 自动识别
-  - [ ] 避免过度切分与上下文丢失
+  - [x] 按条款/段落智能切分
+  - [x] Chunk 大小控制在 150-300 tokens
+  - [x] 保留原文位置信息
+  - [x] 支持 clause_hint 自动识别（支持19种条款类型）
+  - [x] 避免过度切分与上下文丢失
 - **自测要求**：
-  - [ ] 切分结果覆盖测试文档
-  - [ ] 验证 chunk 大小分布
-  - [ ] 验证位置信息连续性
-- **输出文件**：`backend/document/chunker.py`
+  - [x] 切分结果覆盖测试文档
+  - [x] 验证 chunk 大小分布
+  - [x] 验证位置信息连续性
+- **输出文件**：`backend/document/chunker.py`, `tests/test_chunker.py`
 
 ### TASK-204: Embedding Pipeline 实现
 - **描述**：实现文本向量化与向量存储
@@ -666,11 +668,11 @@
 
 ### 总体进度
 - 总任务数：46
-- 已完成：10
+- 已完成：11
 - 进行中：0
-- 待开始：36
+- 待开始：35
 - 已阻塞：0
-- **完成率**：**21.7%**
+- **完成率**：**23.9%**
 
 ### 按优先级
 - P0（核心）：32 任务（已完成 5 个）
@@ -681,7 +683,7 @@
 |------|--------|--------|--------|
 | 基础设施与契约 | 5 | 5 | 100% ✅ |
 | Configuration Agent | 3 | 3 | 100% ✅ |
-| Document Intelligence | 5 | 2 | 40% |
+| Document Intelligence | 5 | 3 | 60% |
 | Execution Agent | 4 | 0 | 0% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |

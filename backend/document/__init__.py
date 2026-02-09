@@ -17,6 +17,12 @@ from .docx_parser import (
     parse_docx,
 )
 
+from .chunker import (
+    Chunk,
+    DocumentChunker,
+    chunk_document,
+)
+
 __all__ = [
     # PDF Parser
     "PDFParser",
@@ -31,4 +37,8 @@ __all__ = [
     "DOCXParser",
     "get_docx_parser",
     "parse_docx",
+    # Chunker
+    "Chunk",
+    "DocumentChunker",
+    "chunk_document",
 ]
