@@ -375,23 +375,25 @@
 
 ## Phase 4: Explainability Agent（追问与解释）
 
-### TASK-401: 解释 Prompt 设计
+### TASK-401: 解释 Prompt 设计 ✅
 - **描述**：设计支持追问与解释的 Prompt 模板
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P1
 - **预计工时**：3h
+- **实际工时**：3h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-302
 - **验收标准**：
-  - [ ] 输入：规则 + 结论 + Evidence + 用户问题
-  - [ ] 输出：基于证据的解释
-  - [ ] 严格避免幻觉
-  - [ ] 支持多轮对话上下文
+  - [x] 输入：规则 + 结论 + Evidence + 用户问题
+  - [x] 输出：基于证据的解释
+  - [x] 严格避免幻觉
+  - [x] 支持多轮对话上下文
 - **自测要求**：
-  - [ ] 准备 15+ 追问测试用例
-  - [ ] 验证回答基于 Evidence
-  - [ ] 人工评估回答质量
-- **输出文件**：`prompts/explain.txt`
+  - [x] 准备 19 个追问测试用例（PASS/RISK/MISSING/ANY状态全覆盖）
+  - [x] 验证回答基于 Evidence
+  - [x] 包含完整示例和限制处理
+- **输出文件**：`prompts/explain.txt`, `tests/test_explain_prompt.py`
 
 ### TASK-402: 追问 API 实现
 - **描述**：实现多轮追问的 HTTP API

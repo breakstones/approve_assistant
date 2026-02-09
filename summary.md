@@ -80,7 +80,15 @@
 - [x] RAG 执行流程
 - [x] 审查 API
 
-### Milestone 5: Web UI
+### Milestone 5: Explainability Agent
+**状态**：🚧 进行中
+**开始时间**：2026-02-09
+**负责人**：Claude
+**交付物**：
+- [x] 解释 Prompt 设计
+- [ ] 追问 API 实现
+
+### Milestone 6: Web UI
 **状态**：📋 未开始
 **计划**：Day 1
 **负责人**：TBD
@@ -90,6 +98,8 @@
 - [ ] 审核结果列表
 - [ ] PDF 预览与高亮
 - [ ] Evidence 联动
+
+### Milestone 7: MVP 集成测试
 
 ### Milestone 6: MVP 集成测试
 **状态**：📋 未开始
@@ -128,6 +138,7 @@
 | 2026-02-09 | TASK-302: 审核 Prompt 设计与实现 | Claude | 强 Evidence 约束的审核 Prompt，支持 PASS/RISK/MISSING |
 | 2026-02-09 | TASK-303: RAG 审查执行流程实现 | Claude | 完整检索+LLM审核流程，异步批处理，Mock LLM |
 | 2026-02-09 | TASK-304: 审查任务 API | Claude | 完整审查HTTP API，支持启动/状态/结果/列表/删除端点 |
+| 2026-02-09 | TASK-401: 解释 Prompt 设计 | Claude | 支持追问与解释的Prompt模板，19个测试用例，严格Evidence约束 |
 
 #### 进行中
 | 任务 | 负责人 | 预计完成 |
@@ -181,16 +192,16 @@
 
 ### 总体统计
 - 总任务数：46
-- 已完成：17
+- 已完成：18
 - 进行中：0
-- 待开始：29
-- **完成率：37.0%**
+- 待开始：28
+- **完成率：39.1%**
 
 ### 按优先级
 | 优先级 | 总数 | 已完成 | 完成率 |
 |--------|------|--------|--------|
 | P0 | 32 | 16 | 50.0% |
-| P1 | 14 | 1 | 7.1% |
+| P1 | 14 | 2 | 14.3% |
 
 ### 按模块
 | 模块 | 总数 | 已完成 | 完成率 |
@@ -199,6 +210,7 @@
 | Configuration Agent | 3 | 3 | 100% ✅ |
 | Document Intelligence | 5 | 5 | 100% ✅ |
 | Execution Agent | 4 | 4 | 100% ✅ |
+| Explainability Agent | 2 | 1 | 50% |
 | Explainability Agent | 2 | 0 | 0% |
 | Web UI | 7 | 0 | 0% |
 | 集成与优化 | 3 | 0 | 0% |
