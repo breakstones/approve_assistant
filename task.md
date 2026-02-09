@@ -21,73 +21,81 @@
 
 ## Phase 0: 基础设施与契约定义
 
-### TASK-001: 项目初始化与环境搭建
+### TASK-001: 项目初始化与环境搭建 ✅
 - **描述**：初始化项目仓库、配置开发环境、搭建基础目录结构
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：2h
+- **实际工时**：2h
+- **完成时间**：2026-02-09
 - **依赖**：无
 - **验收标准**：
-  - [ ] 创建 Monorepo 结构（frontend/、backend/、prompts/、shared/）
-  - [ ] 配置后端虚拟环境与依赖
-  - [ ] 配置前端 Vite + React 项目
-  - [ ] 配置 .gitignore 与 README
+  - [x] 创建 Monorepo 结构（frontend/、backend/、prompts/、shared/）
+  - [x] 配置后端虚拟环境与依赖
+  - [x] 配置前端 Vite + React 项目
+  - [x] 配置 .gitignore 与 README
 - **自测要求**：
-  - [ ] 后端可正常启动 FastAPI 服务
-  - [ ] 前端可正常启动开发服务器
-  - [ ] 依赖包无冲突
+  - [x] 后端可正常启动 FastAPI 服务
+  - [x] 前端可正常启动开发服务器
+  - [x] 依赖包无冲突
 
-### TASK-002: Rule Schema 设计与冻结
+### TASK-002: Rule Schema 设计与冻结 ✅
 - **描述**：设计规则数据结构，作为 Config Agent 与 Execution Agent 的契约
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：1.5h
+- **实际工时**：1.5h
+- **完成时间**：2026-02-09
 - **依赖**：无
 - **验收标准**：
-  - [ ] 定义 Rule JSON Schema
-  - [ ] 支持规则类型：numeric_constraint, text_contains, prohibition, requirement
-  - [ ] 包含字段：rule_id, name, category, intent, type, params, risk_level, retrieval_tags, prompt_template_id
-  - [ ] 提供 5+ 条示例规则
+  - [x] 定义 Rule JSON Schema
+  - [x] 支持规则类型：numeric_constraint, text_contains, prohibition, requirement
+  - [x] 包含字段：rule_id, name, category, intent, type, params, risk_level, retrieval_tags, prompt_template_id
+  - [x] 提供 5+ 条示例规则（实际 8 条）
 - **自测要求**：
-  - [ ] 所有示例规则通过 JSON Schema 验证
-  - [ ] 每种规则类型至少 2 个示例
-- **输出文件**：`shared/schemas/rule_schema.json`
+  - [x] 所有示例规则通过 JSON Schema 验证
+  - [x] 每种规则类型至少 2 个示例
+- **输出文件**：`shared/schemas/rule_schema.json`, `shared/schemas/rule_examples.json`
 
-### TASK-003: Chunk Schema 设计与冻结
+### TASK-003: Chunk Schema 设计与冻结 ✅
 - **描述**：设计文档切分单元的数据结构，支持 Evidence 定位
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：1.5h
+- **实际工时**：1.5h
+- **完成时间**：2026-02-09
 - **依赖**：无
 - **验收标准**：
-  - [ ] 定义 Chunk JSON Schema
-  - [ ] 包含字段：chunk_id, doc_id, page, clause_hint, text, bbox
-  - [ ] bbox 格式：[x1, y1, x2, y2] 或 page coordinates
-  - [ ] 提供 Mock 数据示例
+  - [x] 定义 Chunk JSON Schema
+  - [x] 包含字段：chunk_id, doc_id, page, clause_hint, text, bbox
+  - [x] bbox 格式：[x1, y1, x2, y2] 或 page coordinates
+  - [x] 提供 Mock 数据示例
 - **自测要求**：
-  - [ ] Mock 数据包含至少 3 页、10+ chunks
-  - [ ] bbox 坐标有效性验证
-- **输出文件**：`shared/schemas/chunk_schema.json`
+  - [x] Mock 数据包含至少 3 页、10+ chunks（实际 6 页、12 chunks）
+  - [x] bbox 坐标有效性验证
+- **输出文件**：`shared/schemas/chunk_schema.json`, `shared/schemas/chunk_examples.json`
 
-### TASK-004: Review Result Schema 设计与冻结
+### TASK-004: Review Result Schema 设计与冻结 ✅
 - **描述**：设计审核结果数据结构，连接 Execution Agent 与 UI
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：1.5h
+- **实际工时**：1.5h
+- **完成时间**：2026-02-09
 - **依赖**：TASK-002, TASK-003
 - **验收标准**：
-  - [ ] 定义 ReviewResult JSON Schema
-  - [ ] 包含字段：rule_id, status (PASS/RISK/MISSING), reason, evidence []
-  - [ ] evidence 引用 chunk_id 并包含定位信息
-  - [ ] 提供 Mock 数据示例
+  - [x] 定义 ReviewResult JSON Schema
+  - [x] 包含字段：rule_id, status (PASS/RISK/MISSING), reason, evidence []
+  - [x] evidence 引用 chunk_id 并包含定位信息
+  - [x] 提供 Mock 数据示例
 - **自测要求**：
-  - [ ] 覆盖 PASS/RISK/MISSING 三种状态
-  - [ ] evidence 数组支持空值、单值、多值
-- **输出文件**：`shared/schemas/review_result_schema.json`
+  - [x] 覆盖 PASS/RISK/MISSING 三种状态
+  - [x] evidence 数组支持空值、单值、多值
+- **输出文件**：`shared/schemas/review_result_schema.json`, `shared/schemas/review_result_examples.json`
 
 ### TASK-005: Document State Schema 设计
 - **描述**：设计文档状态机，支撑 UI 进度展示与操作控制
@@ -652,26 +660,27 @@
 
 ### 总体进度
 - 总任务数：46
-- 已完成：0
-- 进行中：0
-- 待开始：46
+- 已完成：4
+- 进行中：1
+- 待开始：41
 - 已阻塞：0
+- **完成率**：**8.7%**
 
 ### 按优先级
-- P0（核心）：32 任务
+- P0（核心）：32 任务（已完成 4 个）
 - P1（优化）：14 任务
 
 ### 按模块
-| 模块 | 任务数 | 完成率 |
-|------|--------|--------|
-| 基础设施与契约 | 5 | 0% |
-| Configuration Agent | 3 | 0% |
-| Document Intelligence | 5 | 0% |
-| Execution Agent | 4 | 0% |
-| Explainability Agent | 2 | 0% |
-| Web UI | 7 | 0% |
-| 集成与优化 | 3 | 0% |
-| 测试与交付 | 5 | 0% |
+| 模块 | 任务数 | 已完成 | 完成率 |
+|------|--------|--------|--------|
+| 基础设施与契约 | 5 | 4 | 80% |
+| Configuration Agent | 3 | 0 | 0% |
+| Document Intelligence | 5 | 0 | 0% |
+| Execution Agent | 4 | 0 | 0% |
+| Explainability Agent | 2 | 0 | 0% |
+| Web UI | 7 | 0 | 0% |
+| 集成与优化 | 3 | 0 | 0% |
+| 测试与交付 | 5 | 0 | 0% |
 
 ---
 

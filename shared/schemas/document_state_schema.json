@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://trustlens.ai/schemas/document_state",
+  "title": "Document",
+  "description": "文档状态机与元数据，支撑 UI 进度展示与操作控制",
+  "type": "object",
+  "required": [
+    "doc_id",
+    "filename",
+    "file_type",
+    "status",
+    "created_at"
+  ],
+  "properties": {
+    "doc_id": {
+      "type": "string",
+      "description": "文档唯一标识符",
+      "examples": ["doc_001", "contract_20250209_001"]
+    },
+    "filename": {
+      "type": "string",
+      "description": "原始文件名",
+      "examples": ["contract.pdf", "agreement.docx"]
+    },
+    "file_type": {
+      "type": "string",
+      "description": "文件类型",
+      "enum": ["pdf", "docx", "doc"],
+      "examples": ["pdf", "docx"]
+    },
+    "file_size": {
+      "type": "integer",
+      "description": "文件大小（字节）",
+      "minimum": 0,
+      "examples": [102400, 5242880]
+    },
+    "file_path": {
+      "type": "string",
+      "description": "存储路径",
+      "examples": ["/uploads/doc_001.pdf"]
+    },
+    "status": {
+      "type": "string",
+      "description": "文档处理状态",
+      "enum": ["UPLOADED", "PROCESSING", "READY", "REVIEWING", "REVIEWED", "FAILED"],
+      "examples": ["UPLOADED", "PROCESSING", "READY"]
+    },
+    "status_message": {
+      "type": "string",
+      "description": "状态描述信息",
+      "examples": ["正在解析文档...", "处理完成", "文档解析失败"]
+    },
+    "progress": {
+      "type": "number",
+      "description": "处理进度（0-100）",
+      "minimum": 0,
+      "maximum": 100,
+      "examples": [0, 50, 100]
+    },
+    "page_count": {
+      "type": "integer",
+      "description": "文档页数（解析后可用）",
+      "minimum": 0,
+      "examples": [5, 10, 20]
+    },
+    "chunk_count": {
+      "type": "integer",
+      "description": "切分单元数量（解析后可用）",
+      "minimum": 0,
+      "examples": [50, 100, 200]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "文档元数据",
+      "properties": {
+        "title": {"type": "string", "description": "文档标题"},
+        "author": {"type": "string", "description": "作者"},
+        "subject": {"type": "string", "description": "主题"},
+        "keywords": {"type": "array", "items": {"type": "string"}, "description": "关键词"},
+        "creator": {"type": "string", "description": "创建工具"},
+        "producer": {"type": "string", "description": "生成工具"},
+        "creation_date": {"type": "string", "format": "date-time", "description": "创建日期"},
+        "modification_date": {"type": "string", "format": "date-time", "description": "修改日期"}
+      }
+    },
+    "processing_info": {
+      "type": "object",
+      "description": "处理信息",
+      "properties": {
+        "started_at": {"type": "string", "format": "date-time", "description": "开始处理时间"},
+        "completed_at": {"type": "string", "format": "date-time", "description": "完成处理时间"},
+        "processing_time_ms": {"type": "integer", "description": "处理耗时（毫秒）"},
+        "parser_used": {"type": "string", "description": "使用的解析器", "examples": ["pdfplumber", "PyMuPDF", "python-docx"]},
+        "error_message": {"type": "string", "description": "错误信息（失败时）"}
+      }
+    },
+    "review_info": {
+      "type": "object",
+      "description": "审查信息",
+      "properties": {
+        "review_id": {"type": "string", "description": "审查任务 ID"},
+        "rules_count": {"type": "integer", "description": "审查规则数量"},
+        "results": {
+          "type": "object",
+          "description": "审查结果统计",
+          "properties": {
+            "total": {"type": "integer", "description": "总规则数"},
+            "pass": {"type": "integer", "description": "通过数"},
+            "risk": {"type": "integer", "description": "风险数"},
+            "missing": {"type": "integer", "description": "缺失数"}
+          }
+        },
+        "reviewed_at": {"type": "string", "format": "date-time", "description": "审查完成时间"}
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "文档上传时间"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最后更新时间"
+    }
+  },
+  "definitions": {
+    "state_transition": {
+      "type": "object",
+      "description": "状态转换规则",
+      "properties": {
+        "from": {"type": "string", "enum": ["UPLOADED", "PROCESSING", "READY", "REVIEWING", "REVIEWED", "FAILED"]},
+        "to": {"type": "string", "enum": ["UPLOADED", "PROCESSING", "READY", "REVIEWING", "REVIEWED", "FAILED"]},
+        "condition": {"type": "string", "description": "转换条件"},
+        "allowed_operations": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "允许的操作"
+        }
+      }
+    }
+  }
+}

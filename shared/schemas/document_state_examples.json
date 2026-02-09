@@ -1,0 +1,225 @@
+{
+  "state_transitions": {
+    "description": "文档状态转换规则",
+    "states": {
+      "UPLOADED": {
+        "description": "文档已上传，等待处理",
+        "allowed_next": ["PROCESSING", "FAILED"],
+        "allowed_operations": ["delete", "start_processing"]
+      },
+      "PROCESSING": {
+        "description": "正在解析文档",
+        "allowed_next": ["READY", "FAILED"],
+        "allowed_operations": ["cancel"]
+      },
+      "READY": {
+        "description": "文档解析完成，可以开始审查",
+        "allowed_next": ["REVIEWING", "FAILED"],
+        "allowed_operations": ["start_review", "delete"]
+      },
+      "REVIEWING": {
+        "description": "正在执行审查",
+        "allowed_next": ["REVIEWED", "READY", "FAILED"],
+        "allowed_operations": ["cancel_review"]
+      },
+      "REVIEWED": {
+        "description": "审查完成",
+        "allowed_next": ["REVIEWING"],
+        "allowed_operations": ["re_review", "delete"]
+      },
+      "FAILED": {
+        "description": "处理或审查失败",
+        "allowed_next": ["PROCESSING"],
+        "allowed_operations": ["retry", "delete"]
+      }
+    },
+    "transition_rules": [
+      {
+        "from": "UPLOADED",
+        "to": "PROCESSING",
+        "condition": "文档文件验证通过",
+        "automatic": true
+      },
+      {
+        "from": "UPLOADED",
+        "to": "FAILED",
+        "condition": "文件格式不支持或文件损坏",
+        "automatic": true
+      },
+      {
+        "from": "PROCESSING",
+        "to": "READY",
+        "condition": "文档解析成功，chunks 生成完成",
+        "automatic": true
+      },
+      {
+        "from": "PROCESSING",
+        "to": "FAILED",
+        "condition": "解析失败或超时",
+        "automatic": true
+      },
+      {
+        "from": "READY",
+        "to": "REVIEWING",
+        "condition": "用户启动审查或 API 调用",
+        "automatic": false
+      },
+      {
+        "from": "REVIEWING",
+        "to": "REVIEWED",
+        "condition": "所有规则审查完成",
+        "automatic": true
+      },
+      {
+        "from": "REVIEWING",
+        "to": "READY",
+        "condition": "审查被取消",
+        "automatic": false
+      },
+      {
+        "from": "REVIEWED",
+        "to": "REVIEWING",
+        "condition": "用户重新审查",
+        "automatic": false
+      },
+      {
+        "from": "FAILED",
+        "to": "PROCESSING",
+        "condition": "用户重试",
+        "automatic": false
+      }
+    ]
+  },
+  "examples": [
+    {
+      "doc_id": "doc_001",
+      "filename": "contract_001.pdf",
+      "file_type": "pdf",
+      "file_size": 1048576,
+      "file_path": "/uploads/doc_001.pdf",
+      "status": "UPLOADED",
+      "status_message": "文档已上传",
+      "progress": 0,
+      "created_at": "2026-02-09T10:00:00Z",
+      "updated_at": "2026-02-09T10:00:00Z"
+    },
+    {
+      "doc_id": "doc_001",
+      "filename": "contract_001.pdf",
+      "file_type": "pdf",
+      "file_size": 1048576,
+      "file_path": "/uploads/doc_001.pdf",
+      "status": "PROCESSING",
+      "status_message": "正在解析文档...",
+      "progress": 45,
+      "created_at": "2026-02-09T10:00:00Z",
+      "updated_at": "2026-02-09T10:01:00Z",
+      "processing_info": {
+        "started_at": "2026-02-09T10:00:30Z",
+        "parser_used": "pdfplumber"
+      }
+    },
+    {
+      "doc_id": "doc_001",
+      "filename": "contract_001.pdf",
+      "file_type": "pdf",
+      "file_size": 1048576,
+      "file_path": "/uploads/doc_001.pdf",
+      "status": "READY",
+      "status_message": "文档解析完成",
+      "progress": 100,
+      "page_count": 6,
+      "chunk_count": 12,
+      "metadata": {
+        "title": "采购合同",
+        "author": "Company A",
+        "creation_date": "2026-02-01T00:00:00Z"
+      },
+      "processing_info": {
+        "started_at": "2026-02-09T10:00:30Z",
+        "completed_at": "2026-02-09T10:01:30Z",
+        "processing_time_ms": 60000,
+        "parser_used": "pdfplumber"
+      },
+      "created_at": "2026-02-09T10:00:00Z",
+      "updated_at": "2026-02-09T10:01:30Z"
+    },
+    {
+      "doc_id": "doc_001",
+      "filename": "contract_001.pdf",
+      "file_type": "pdf",
+      "file_size": 1048576,
+      "file_path": "/uploads/doc_001.pdf",
+      "status": "REVIEWING",
+      "status_message": "正在执行智能审查...",
+      "progress": 100,
+      "page_count": 6,
+      "chunk_count": 12,
+      "metadata": {
+        "title": "采购合同"
+      },
+      "processing_info": {
+        "started_at": "2026-02-09T10:00:30Z",
+        "completed_at": "2026-02-09T10:01:30Z",
+        "processing_time_ms": 60000,
+        "parser_used": "pdfplumber"
+      },
+      "review_info": {
+        "review_id": "review_001",
+        "rules_count": 8
+      },
+      "created_at": "2026-02-09T10:00:00Z",
+      "updated_at": "2026-02-09T10:02:00Z"
+    },
+    {
+      "doc_id": "doc_001",
+      "filename": "contract_001.pdf",
+      "file_type": "pdf",
+      "file_size": 1048576,
+      "file_path": "/uploads/doc_001.pdf",
+      "status": "REVIEWED",
+      "status_message": "审查完成",
+      "progress": 100,
+      "page_count": 6,
+      "chunk_count": 12,
+      "metadata": {
+        "title": "采购合同"
+      },
+      "processing_info": {
+        "started_at": "2026-02-09T10:00:30Z",
+        "completed_at": "2026-02-09T10:01:30Z",
+        "processing_time_ms": 60000,
+        "parser_used": "pdfplumber"
+      },
+      "review_info": {
+        "review_id": "review_001",
+        "rules_count": 8,
+        "results": {
+          "total": 8,
+          "pass": 5,
+          "risk": 2,
+          "missing": 1
+        },
+        "reviewed_at": "2026-02-09T10:03:00Z"
+      },
+      "created_at": "2026-02-09T10:00:00Z",
+      "updated_at": "2026-02-09T10:03:00Z"
+    },
+    {
+      "doc_id": "doc_002",
+      "filename": "broken_file.pdf",
+      "file_type": "pdf",
+      "file_size": 0,
+      "file_path": "/uploads/doc_002.pdf",
+      "status": "FAILED",
+      "status_message": "文件损坏，无法解析",
+      "progress": 0,
+      "processing_info": {
+        "started_at": "2026-02-09T10:05:00Z",
+        "error_message": "PdfReadError: Unable to read file"
+      },
+      "created_at": "2026-02-09T10:04:00Z",
+      "updated_at": "2026-02-09T10:05:00Z"
+    }
+  ]
+}
