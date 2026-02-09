@@ -97,21 +97,23 @@
   - [x] evidence 数组支持空值、单值、多值
 - **输出文件**：`shared/schemas/review_result_schema.json`, `shared/schemas/review_result_examples.json`
 
-### TASK-005: Document State Schema 设计
+### TASK-005: Document State Schema 设计 ✅
 - **描述**：设计文档状态机，支撑 UI 进度展示与操作控制
-- **负责人**：TBD
-- **状态**：TODO
+- **负责人**：Claude
+- **状态**：DONE
 - **优先级**：P0
 - **预计工时**：1h
+- **实际工时**：1h
+- **完成时间**：2026-02-09
 - **依赖**：无
 - **验收标准**：
-  - [ ] 定义状态流转：UPLOADED → PROCESSING → READY → REVIEWING → REVIEWED
-  - [ ] 定义状态转换条件与非法操作
-  - [ ] 设计 Document 元数据结构
+  - [x] 定义状态流转：UPLOADED → PROCESSING → READY → REVIEWING → REVIEWED
+  - [x] 定义状态转换条件与非法操作
+  - [x] 设计 Document 元数据结构
 - **自测要求**：
-  - [ ] 状态转换逻辑验证
-  - [ ] 非法操作拒绝测试
-- **输出文件**：`shared/schemas/document_state_schema.json`
+  - [x] 状态转换逻辑验证（9条转换规则）
+  - [x] 非法操作拒绝测试
+- **输出文件**：`shared/schemas/document_state_schema.json`, `shared/schemas/document_state_examples.json`
 
 ---
 
@@ -660,20 +662,20 @@
 
 ### 总体进度
 - 总任务数：46
-- 已完成：4
-- 进行中：1
+- 已完成：5
+- 进行中：0
 - 待开始：41
 - 已阻塞：0
-- **完成率**：**8.7%**
+- **完成率**：**10.9%**
 
 ### 按优先级
-- P0（核心）：32 任务（已完成 4 个）
+- P0（核心）：32 任务（已完成 5 个）
 - P1（优化）：14 任务
 
 ### 按模块
 | 模块 | 任务数 | 已完成 | 完成率 |
 |------|--------|--------|--------|
-| 基础设施与契约 | 5 | 4 | 80% |
+| 基础设施与契约 | 5 | 5 | 100% ✅ |
 | Configuration Agent | 3 | 0 | 0% |
 | Document Intelligence | 5 | 0 | 0% |
 | Execution Agent | 4 | 0 | 0% |
